@@ -1,27 +1,27 @@
 package TestScanner;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import Service.Dump;
+import Service.NationalizeApiService;
+import lombok.*;
 
+import java.util.Scanner;
+@Getter
+@Setter
 public class Test {
 
     private static final Scanner sc = new Scanner(System.in);
 
     public static void bonjour() {
         System.out.println("Bonjour !");
-        System.out.println("Comment t'appelle-tu ?");
+        System.out.println("J'ai decouvert quelque chose de super !");
+        System.out.println("Regarde ! Donne moi un nom de famille :");
         String name = sc.nextLine();
-        if (name == null){
-            System.out.println("tu n'as pas de Prenom?");
-            bonjour();
+        if (name.isEmpty()){
+            System.out.println("tu n'as pas de nom ? =)");
+            return;
         }
         name = name.toLowerCase();
-        if (name.equals("surget")){
-            System.out.println("c'est ton nom de famille ? moi je prefer ton prenom");
-        }
-        System.out.println("Bonjour " + name + " je suis content de te parler !");
-
+        System.out.println(NationalizeApiService.getInfoFromName(name));
     }
 
     public static void scannerNbI() {
