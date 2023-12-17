@@ -1,2 +1,4 @@
-package TestScanner;public class test {
+package TestScanner;
+
+public class test {
 }
