@@ -23,7 +23,6 @@ public class NationalizeApiService {
         InfoName infoName = new InfoName();
         JSONTokener tokener = new JSONTokener(json);
         JSONObject object = new JSONObject(tokener);
-        infoName. object.getInt("count");
         JSONArray country = object.getJSONArray("country");
         for (int i = 0; i < country.length(); i++) {
 

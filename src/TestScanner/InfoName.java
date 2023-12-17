@@ -7,10 +7,11 @@ import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class InfoName {
 
     private String name;
@@ -22,4 +23,6 @@ public class InfoName {
     public void addCountryStats(String country,Double probability){
         countryStats.put(country,probability);
     }
+
+
 }
