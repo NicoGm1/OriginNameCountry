@@ -1,4 +1,4 @@
-package TestScanner;
+package Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,10 +18,10 @@ public class InfoName {
 
     private int count;
 
-    private Map<String, Double> countryStats = new HashMap<>();
+    private Map<Double, String> countryStats = new HashMap<>();
 
-    public void addCountryStats(String country,Double probability){
-        countryStats.put(country,probability);
+    public void addCountryStats(Double probability ,String country){
+        countryStats.put(probability, country);
     }
 
 
