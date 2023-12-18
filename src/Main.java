@@ -1,14 +1,11 @@
-import Service.Dump;
-import TestScanner.Test;
+import Service.NationalizeApiServiceWithGson;
+import Service.UrlEncoding;
+import TestScanner.OriginNameCountry;
 
 public class Main {
     public static void main(String[] args) {
-//        Test.scannerNbI();
-
-            Test.bonjour();
-
-
-
+       // OriginNameCountry.originNameCountry();
+        OriginNameCountry.originNameCountryGson();
     }
 
 }

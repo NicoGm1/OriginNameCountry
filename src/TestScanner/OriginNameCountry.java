@@ -1,41 +1,40 @@
 package TestScanner;
 
 import Entity.InfoName;
+import Entity.InfoNameGson;
 import Service.NationalizeApiService;
+import Service.NationalizeApiServiceWithGson;
+import Service.UrlEncoding;
 import lombok.experimental.UtilityClass;
 import org.json.JSONObject;
 
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 
 @UtilityClass
-public class Test {
+public class OriginNameCountry {
 
     private static final Scanner sc = new Scanner(System.in);
 
-    public static void bonjour() {
+    public static void originNameCountry() {
         System.out.println("Bonjour !");
         System.out.println("J'ai decouvert quelque chose de super ! Regarde !");
         System.out.println("Donne moi un nom de famille :");
         String name = sc.nextLine();
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             System.out.println("tu n'as pas de nom ? =)");
             return;
         }
-        name = name.toLowerCase();
         InfoName infoName = NationalizeApiService.getInfoFromName(name);
         System.out.println("D'après la base de donnée de nationalize.io");
-        if (infoName == null){
+        if (infoName == null) {
             System.out.println("info sur le nom non trouvé =(");
             return;
         }
-        if (!infoName.getName().isEmpty()){
+        if (!infoName.getName().isEmpty()) {
             System.out.println("Votre nom : " + infoName.getName() + " est present " + infoName.getCount() + " fois dans la base de donnée");
             System.out.println("voici les " + infoName.getCountryStats().size() + " pays où il est le plus representé:");
-            sortandsoutHashmap(infoName.getCountryStats());
+            sortandsoutHashmap(infoName.getCountryStats());                // I don't like how it's done, I will fix it later.
         }
     }
 
@@ -44,20 +43,34 @@ public class Test {
         Set<Map.Entry<Double, String>> set = map.entrySet();
         for (Object o : set) {
             Map.Entry entry = (Map.Entry) o;
-            double pourcentage = ((double)entry.getKey() * 100);
+            Double pourcentage = ((Double)entry.getKey() * 100);
             System.out.println(pourcentage + "% sont du pays: " + getCountry(entry.getValue()));
         }
     }
 
-    public static String getNationalityWithLastName(String name){
-        StringBuilder probalitity = new StringBuilder("Ton nom de famille (");
-        probalitity.append(name.toUpperCase());
-        probalitity.append(")");
-
-        return probalitity.toString();
+    public static void originNameCountryGson() {
+        System.out.println("Bonjour !");
+        System.out.println("J'ai decouvert quelque chose de super ! Regarde !");
+        System.out.println("Donne moi un nom de famille :");
+        String name = sc.nextLine();
+        if (name.isEmpty()) {
+            System.out.println("tu n'as pas de nom ? =)");
+            return;
+        }
+        InfoNameGson infoNameGson = NationalizeApiServiceWithGson.getInfoFromName(name);
+        if (infoNameGson == null) {
+            System.out.println("info sur le nom non trouvé =(");
+            return;
+        }
+        System.out.println("D'après la base de donnée de nationalize.io");
+        if (!infoNameGson.getName().isEmpty()) {
+            System.out.println("Votre nom : " + infoNameGson.getName().toUpperCase() + " est present " + infoNameGson.getCount() + " fois dans la base de donnée");
+            System.out.println("voici les " + infoNameGson.getCountry().size() + " pays où il est le plus representé: ");
+            infoNameGson.triCountry().forEach(s -> System.out.println(s.getProbability()*100 + "% en " + getCountry(s.getCountry_id())));
+        }
     }
 
-    public String getCountry(Object code){
+    private String getCountry(Object code) {
         String jsonCountryCode = "{\n" +
                 "  \"AF\": \"Afghanistan\",\n" +
                 "  \"ZA\": \"Afrique du Sud\",\n" +
@@ -317,12 +330,12 @@ public class Test {
                 "}";
         JSONObject jsonObject = new JSONObject(jsonCountryCode);
         String country;
-try {
-    country = jsonObject.getString((String) code);
-} catch (Exception e){
-    country = (String) code;
-}
-        //return jsonObject.getString((String) code);
-return country;
+        try {
+            country = jsonObject.getString((String) code);
+        } catch (Exception e) {
+            country = (String) code;       // if the country code is not in the list
+        }
+
+        return country;
     }
 }
