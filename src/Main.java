@@ -1,4 +1,4 @@
-import OriginName.TestScanner.OriginNameCountry;
+import OriginName.ONC.OriginNameCountry;
 
 public class Main {
     public static void main(String[] args) {
