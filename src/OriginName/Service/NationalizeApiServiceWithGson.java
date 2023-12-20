@@ -1,12 +1,13 @@
-package Service;
+package OriginName.Service;
 
-import Entity.InfoName;
-import Entity.InfoNameGson;
+import OriginName.Entity.InfoNameGson;
 import com.google.gson.Gson;
+import lombok.experimental.UtilityClass;
 
+@UtilityClass
 public class NationalizeApiServiceWithGson {
 
-    private static final HttpClientService httpClientService = new HttpClientService();
+    private static final HttpClientService httpClientService = HttpClientService.getHttpClientService();
 
     public static InfoNameGson getInfoFromName(String name) {
         name = name.toLowerCase();

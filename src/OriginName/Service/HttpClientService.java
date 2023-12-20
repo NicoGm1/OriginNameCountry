@@ -1,6 +1,4 @@
-package Service;
-
-import lombok.experimental.UtilityClass;
+package OriginName.Service;
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,6 +9,20 @@ import java.net.http.HttpResponse;
 public class HttpClientService {
 
     private final HttpClient httpClient = HttpClient.newHttpClient();
+
+    private static HttpClientService httpClientService;
+
+    private HttpClientService() {
+    }
+
+    public static HttpClientService getHttpClientService() {
+        if (httpClientService == null) {
+            httpClientService = new HttpClientService();
+        }
+        return httpClientService;
+    }
+
+
 
     public String get(String url) {
         HttpRequest httpRequest = HttpRequest.newBuilder()

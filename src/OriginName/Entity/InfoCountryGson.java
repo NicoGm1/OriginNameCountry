@@ -1,4 +1,4 @@
-package Entity;
+package OriginName.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountryInfo implements Comparable<CountryInfo>{
+public class InfoCountryGson implements Comparable<InfoCountryGson>{
     private String country_id;
     private Float probability;
 
@@ -23,7 +23,7 @@ public class CountryInfo implements Comparable<CountryInfo>{
     }
 
     @Override
-    public int compareTo(CountryInfo o) {
+    public int compareTo(InfoCountryGson o) {
         return (int)(o.probability*1000 - this.probability*1000);
     }
 }

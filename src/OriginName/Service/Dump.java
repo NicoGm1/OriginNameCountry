@@ -1,4 +1,4 @@
-package Service;
+package OriginName.Service;
 
 import lombok.experimental.UtilityClass;
 import org.json.JSONObject;
