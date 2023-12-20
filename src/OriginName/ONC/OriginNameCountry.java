@@ -1,4 +1,4 @@
-package OriginName.TestScanner;
+package OriginName.ONC;
 
 
 import OriginName.Entity.InfoNameGson;
