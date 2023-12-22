@@ -24,7 +24,7 @@ public class HttpClientService {
 
 
 
-    public String get(String url) {
+    public HttpResponse<String> get(String url) {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
                 .uri(URI.create(url))
@@ -34,7 +34,7 @@ public class HttpClientService {
         return send(httpRequest, url);
     }
 
-    public String post(String url, String body) {
+    public HttpResponse<String> post(String url, String body) {
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .uri(URI.create(url))
@@ -44,16 +44,15 @@ public class HttpClientService {
         return send(httpRequest, url);
     }
 
-    private String send(HttpRequest httpRequest, String url) {
-        String content = null;
+    private HttpResponse<String> send(HttpRequest httpRequest, String url) {
+        HttpResponse<String> response = null;
         try {
-            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            content = response.body();
+            response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             System.out.println("Error while calling : " + url);
             System.out.println(e.getMessage());
         }
-        return content;
+        return response;
     }
 
 }
