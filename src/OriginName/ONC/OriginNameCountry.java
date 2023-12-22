@@ -31,8 +31,9 @@ public class OriginNameCountry {
             return;
         }
         InfoNameGson infoNameGson = NationalizeApiServiceWithGson.getInfoFromName(name);
-        if (infoNameGson == null) {
-            System.out.println("info sur le nom non trouvé =(");
+        if (infoNameGson == null  || infoNameGson.getName() == null) {
+            System.out.println("info sur le nom non trouvé =( ");
+
             return;
         }
         System.out.println("D'après la base de donnée de nationalize.io");
