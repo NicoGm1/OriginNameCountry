@@ -20,9 +20,9 @@ public class OriginNameCountry {
     public static void originNameCountryGson() {
         System.out.println("Bonjour !");
         System.out.println("J'ai decouvert quelque chose de super ! Regarde !");
-        System.out.println("Donne moi un nom de famille :                                     // (ff pour quitter)");
+        System.out.println("Donne moi un nom de famille :                                     // (exit pour quitter)");
         String name = sc.nextLine();
-        if (name.equals("ff")) {
+        if (name.equals("exit")) {
             return;
         }
         if (name.isEmpty()) {
@@ -48,6 +48,7 @@ public class OriginNameCountry {
                 System.out.println(formattedResult + "% en " + CountryFromCode.getCountryFromCode(s.getCountry_id()));
             });
         }
+        System.out.println("----------------------------");
         originNameCountryGson();
     }
 }

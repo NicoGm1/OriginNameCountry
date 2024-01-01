@@ -24,6 +24,7 @@ public class InfoCountryGson implements Comparable<InfoCountryGson>{
 
     @Override
     public int compareTo(InfoCountryGson o) {
+
         return (int)(o.probability*1000 - this.probability*1000);
     }
 }
